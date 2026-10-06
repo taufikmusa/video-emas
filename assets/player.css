@@ -1,0 +1,315 @@
+:root{
+  --gold:#FFCE32;        /* kuning brand simpanemasfizikal.com */
+  --gold-deep:#C08A00;
+  --wa:#25D366;          /* hijau WhatsApp */
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{
+  margin:0; padding:0; height:100%; overflow:hidden;
+  background:#000; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  color:#fff;
+}
+
+/* ================= SWIPE FEED ================= */
+.feed{
+  height:100dvh; width:100%; overflow-y:scroll; overflow-x:hidden;
+  scroll-snap-type:y mandatory; scroll-behavior:auto;
+  -webkit-overflow-scrolling:touch; overscroll-behavior-y:contain;
+}
+.feed::-webkit-scrollbar{ display:none; }
+.slide{
+  position:relative; height:100dvh; width:100%;
+  scroll-snap-align:start; scroll-snap-stop:always;
+  overflow:hidden; background:#000;
+}
+.slide video{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; background:#000;
+}
+.scrim-top{
+  position:absolute; top:0; left:0; right:0; height:200px; z-index:2;
+  background:linear-gradient(to bottom, rgba(0,0,0,.7), rgba(0,0,0,0));
+  pointer-events:none;
+}
+.scrim-bottom{
+  position:absolute; bottom:0; left:0; right:0; height:52%; z-index:2;
+  background:linear-gradient(to top, rgba(0,0,0,.88) 12%, rgba(0,0,0,.4) 58%, rgba(0,0,0,0));
+  pointer-events:none;
+}
+
+/* ================= CHROME TETAP (luar scroller) ================= */
+.chrome{
+  position:fixed; top:calc(14px + env(safe-area-inset-top)); left:14px; right:14px; z-index:20;
+  pointer-events:none;
+}
+.topbar{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.host{ display:flex; align-items:center; gap:8px; min-width:0; flex:1 1 auto; }
+.avatar{
+  width:38px; height:38px; border-radius:50%; flex-shrink:0;
+  object-fit:cover; display:block; background:#fff;
+  border:1.5px solid var(--gold);
+}
+.host-meta{ line-height:1.2; min-width:0; overflow:hidden; }
+.host-name{ font-size:13.5px; font-weight:700; white-space:nowrap; }
+.host-sub{
+  font-size:10.5px; color:rgba(255,255,255,.75); margin-top:1px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.host-tel{
+  display:inline-block; margin-top:1px; font-size:10.5px; font-weight:700;
+  color:var(--gold); text-decoration:none; white-space:nowrap;
+  pointer-events:auto;   /* .chrome pointer-events:none — benarkan tap untuk call */
+}
+.top-right{ display:flex; align-items:center; gap:6px; flex-shrink:0; pointer-events:auto; }
+.series-chip{
+  display:flex; align-items:center; gap:5px; white-space:nowrap;
+  background:rgba(0,0,0,.45); border:1px solid rgba(255,255,255,.16);
+  border-radius:14px; padding:4px 9px; font-size:10.5px; font-weight:600;
+  color:rgba(255,255,255,.9);
+}
+.series-chip .sq{ width:7px; height:7px; background:var(--gold); border-radius:2px; }
+.infobtn{
+  width:28px; height:28px; border-radius:50%; background:rgba(0,0,0,.45);
+  border:1px solid rgba(255,255,255,.22); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:700; font-family:Georgia,serif; padding:0;
+}
+
+/* progress: bar bersegmen + kiraan 3/10 */
+.progress{ display:flex; align-items:center; gap:8px; margin-top:10px; }
+.bars{ display:flex; gap:3px; flex:1; min-width:0; }
+/* bar bersegmen: `fill` bergerak ikut masa video, jadi orang nampak
+   bila slide akan bertukar sendiri — bukan sekadar tahu dia di mana */
+.bars .bar{
+  flex:1; height:2.5px; border-radius:2px;
+  background:rgba(255,255,255,.22); overflow:hidden;
+}
+.bars .bar .fill{ height:100%; width:0%; background:var(--gold); border-radius:2px; }
+.bars .bar.seen .fill{ width:100%; background:rgba(255,255,255,.55); }
+.count{
+  font-size:10.5px; font-weight:700; color:rgba(255,255,255,.85);
+  letter-spacing:.4px; flex-shrink:0; font-variant-numeric:tabular-nums;
+}
+
+/* ================= ISI SETIAP SLIDE ================= */
+/* baris bawah (senyap + CTA terapung) ambil ~56px — semua isi duduk atas dia */
+.s-body{
+  position:absolute; left:14px; right:76px; bottom:calc(74px + env(safe-area-inset-bottom));
+  z-index:5; display:flex; flex-direction:column; gap:8px;
+}
+.topic{
+  align-self:flex-start; max-width:100%;
+  background:rgba(255,206,50,.14); border:1px solid rgba(255,206,50,.4);
+  color:var(--gold); font-size:12.5px; font-weight:700; line-height:1.3;
+  padding:6px 11px; border-radius:10px;
+}
+.cmt-label{
+  font-size:9.5px; font-weight:600; letter-spacing:.35px;
+  color:rgba(255,255,255,.55); text-transform:uppercase;
+}
+.cmts{
+  display:flex; flex-direction:column; justify-content:flex-end; gap:7px;
+  min-height:96px; overflow:hidden;
+}
+.c-row{
+  display:flex; gap:7px; align-items:flex-start;
+  font-size:12.5px; line-height:1.35; animation:rise .35s ease-out;
+}
+@keyframes rise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+.c-av{
+  width:22px; height:22px; border-radius:50%; flex-shrink:0; margin-top:1px;
+  background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center;
+  font-size:9.5px; font-weight:700;
+}
+.c-body{ background:rgba(0,0,0,.34); padding:5px 9px; border-radius:12px; max-width:100%; }
+.c-name{ font-weight:700; margin-right:5px; }
+.c-row.reply .c-av{ background:linear-gradient(135deg,var(--gold),var(--gold-deep)); color:#1a1200; }
+.c-row.reply .c-body{ background:rgba(255,206,50,.16); border:1px solid rgba(255,206,50,.35); }
+.c-tag{ font-size:9px; font-weight:700; color:var(--gold); letter-spacing:.3px; display:block; margin-bottom:1px; }
+
+/* rail kanan — WhatsApp + Share (dua-dua link sebenar) */
+.rail{
+  position:absolute; right:12px; bottom:calc(80px + env(safe-area-inset-bottom)); z-index:6;
+  display:flex; flex-direction:column; align-items:center; gap:12px;
+}
+.rail a, .rail button{
+  background:none; border:none; padding:0; color:#fff; text-decoration:none;
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+  font-size:10px; font-weight:600;
+}
+.rail .icon{
+  width:42px; height:42px; border-radius:50%; background:rgba(0,0,0,.38);
+  border:1px solid rgba(255,255,255,.15);
+  display:flex; align-items:center; justify-content:center; font-size:19px;
+}
+.rail .icon svg{ width:23px; height:23px; display:block; }
+.rail .icon.wa{
+  background:var(--wa); border-color:rgba(255,255,255,.35);
+  box-shadow:0 0 0 0 rgba(37,211,102,.55); animation:waPulse 2.6s ease-out infinite;
+}
+@keyframes waPulse{
+  0%   { box-shadow:0 0 0 0 rgba(37,211,102,.55); }
+  70%  { box-shadow:0 0 0 12px rgba(37,211,102,0); }
+  100% { box-shadow:0 0 0 0 rgba(37,211,102,0); }
+}
+
+/* CTA terapung — bawah kanan, setiap slide kecuali yang terakhir */
+.cta-float{
+  position:fixed; right:12px; bottom:calc(16px + env(safe-area-inset-bottom)); z-index:22;
+  background:var(--gold); color:#1a1200; border:none; text-decoration:none;
+  font-weight:800; font-size:13px; padding:11px 18px; border-radius:24px;
+  box-shadow:0 6px 20px rgba(0,0,0,.5);
+  transition:opacity .25s, transform .25s;
+}
+.cta-float.hide{ opacity:0; transform:translateY(14px); pointer-events:none; }
+
+/* Kad pinned — bawah kiri, sebelah butang Daftar. Tinggi sengaja
+   dipadankan dengan butang Daftar supaya baris bawah nampak satu unit.
+   Disembunyikan pada slide akhir sebab blok CTA penuh dah ambil alih. */
+.pinned{
+  position:fixed; left:12px; right:112px; bottom:calc(16px + env(safe-area-inset-bottom));
+  z-index:22; display:flex; align-items:center; gap:8px; text-decoration:none;
+  background:linear-gradient(180deg,#171410,#0d0b09);
+  border:1px solid rgba(255,206,50,.45); border-radius:12px; padding:5px 9px;
+  box-shadow:0 6px 20px rgba(0,0,0,.5);
+  transition:opacity .25s, transform .25s;
+}
+.pinned.hide{ opacity:0; transform:translateY(14px); pointer-events:none; }
+.pinned-ic{ width:28px; height:28px; border-radius:7px; flex-shrink:0; object-fit:cover; background:var(--gold); }
+.pinned-txt{ min-width:0; }
+.pinned-t{
+  font-size:11px; font-weight:800; line-height:1.25; color:#fff;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  display:flex; align-items:center; gap:5px;
+}
+.pinned-tag{
+  font-size:8px; font-weight:800; letter-spacing:.4px; color:#1a1200;
+  background:var(--gold); border-radius:3px; padding:1px 4px; flex-shrink:0;
+}
+.pinned-s{
+  font-size:9.5px; color:rgba(255,255,255,.7); margin-top:1px; line-height:1.2;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+/* Penunjuk main/jeda — muncul di tengah bila orang tap untuk jeda */
+.playpause{
+  position:fixed; left:50%; top:50%; transform:translate(-50%,-50%) scale(.7);
+  z-index:15; width:72px; height:72px; border-radius:50%;
+  background:rgba(0,0,0,.5); border:1.5px solid rgba(255,255,255,.35);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .2s, transform .2s;
+}
+.playpause.show{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+.playpause svg{ width:30px; height:30px; fill:#fff; }
+
+/* butang senyap duduk dalam rail kanan — tiada butang terapung kiri
+   supaya ia tak bertindih dengan komen atau blok CTA slide akhir */
+
+/* ================= SLIDE TERAKHIR — CTA PENUH ================= */
+.slide.final .s-body{ right:76px; bottom:calc(178px + env(safe-area-inset-bottom)); }
+.slide.final .rail{ bottom:calc(184px + env(safe-area-inset-bottom)); }
+.cta-block{
+  position:absolute; left:12px; right:12px; bottom:calc(16px + env(safe-area-inset-bottom));
+  z-index:8; background:linear-gradient(180deg,#171410,#0d0b09);
+  border:1px solid rgba(255,206,50,.45); border-radius:16px;
+  padding:13px 14px 14px; box-shadow:0 10px 30px rgba(0,0,0,.6);
+}
+.cta-head{ display:flex; align-items:center; gap:10px; margin-bottom:11px; }
+.cta-icon{ width:38px; height:38px; border-radius:9px; flex-shrink:0; object-fit:cover; background:var(--gold); }
+.cta-title{ font-size:13.5px; font-weight:800; line-height:1.25; }
+.cta-sub{ font-size:10.5px; color:rgba(255,255,255,.72); margin-top:2px; line-height:1.3; }
+.cta-big{
+  display:block; width:100%; text-align:center; text-decoration:none;
+  background:var(--gold); color:#1a1200; font-weight:900; font-size:15px;
+  padding:14px; border-radius:11px; letter-spacing:.2px;
+}
+.cta-note{ text-align:center; font-size:9.5px; color:rgba(255,255,255,.5); margin-top:8px; }
+
+/* ================= DISCLAIMER ================= */
+.disc{
+  position:fixed; inset:0; z-index:40; display:flex; align-items:center; justify-content:center;
+  padding:26px; background:rgba(0,0,0,.72); backdrop-filter:blur(3px);
+  opacity:0; pointer-events:none; transition:opacity .5s ease;
+}
+.disc.show{ opacity:1; pointer-events:auto; }
+.disc.auto{ pointer-events:none; }          /* fade automatik slide 1 — tak block swipe */
+.disc-card{
+  max-width:330px; background:rgba(18,16,13,.96);
+  border:1px solid rgba(255,206,50,.4); border-radius:14px;
+  padding:16px 16px 14px; text-align:center;
+}
+.disc-icon{
+  width:30px; height:30px; border-radius:50%; margin:0 auto 9px;
+  border:1.5px solid var(--gold); color:var(--gold);
+  display:flex; align-items:center; justify-content:center;
+  font-family:Georgia,serif; font-size:15px; font-weight:700;
+}
+.disc-text{ font-size:12.5px; line-height:1.55; color:rgba(255,255,255,.9); }
+.disc-close{
+  margin-top:13px; background:var(--gold); color:#1a1200; border:none;
+  font-weight:800; font-size:12.5px; padding:9px 22px; border-radius:9px;
+}
+.disc.auto .disc-close{ display:none; }
+
+@media (max-height:680px){
+  .cmts{ min-height:70px; }
+  .topic{ font-size:11.5px; }
+}
+
+/* ===== butang buka suara di tengah skrin =====
+   Butang senyap dalam rail kanan mudah terlepas pandang, jadi selagi
+   bunyi masih tertutup kita letak satu sasaran besar di tengah. Sekali
+   ditekan ia lesap. Kalau orang senyapkan semula, ia muncul balik. */
+.sound-cue{
+  position:fixed; left:50%; top:38%; transform:translate(-50%,-50%) scale(.9);
+  z-index:30; display:flex; align-items:center; gap:9px; cursor:pointer;
+  background:rgba(0,0,0,.72); backdrop-filter:blur(4px);
+  border:1.5px solid var(--gold); color:#fff;
+  font-family:inherit; font-size:13px; font-weight:700;
+  padding:9px 16px 9px 9px; border-radius:30px;
+  box-shadow:0 8px 26px rgba(0,0,0,.55);
+  opacity:0; pointer-events:none; transition:opacity .28s, transform .28s;
+}
+.sound-cue.show{ opacity:1; transform:translate(-50%,-50%) scale(1); pointer-events:auto; }
+.sc-ic{
+  width:30px; height:30px; border-radius:50%; background:var(--gold); color:#1a1200;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  animation:scPulse 2.2s ease-out infinite;
+}
+.sc-ic svg{ width:17px; height:17px; display:block; }
+@keyframes scPulse{
+  0%   { box-shadow:0 0 0 0 rgba(255,206,50,.6); }
+  70%  { box-shadow:0 0 0 12px rgba(255,206,50,0); }
+  100% { box-shadow:0 0 0 0 rgba(255,206,50,0); }
+}
+
+/* ===== emoji reaksi terapung =====
+   Lajur sempit di sebelah kanan, betul-betul DI ATAS rail supaya emoji
+   tak duduk atas ikon EBook, Bunyi, WhatsApp dan Kongsi. Rail setinggi
+   260px bermula 80px dari bawah, jadi lapisan ini bermula pada 348px.
+   Ia hiasan semata, jadi pointer-events:none supaya tap tetap sampai
+   ke video. */
+.reacts{
+  position:fixed; right:14px; bottom:calc(348px + env(safe-area-inset-bottom));
+  width:58px; height:200px; --rise:-196px;
+  z-index:7; pointer-events:none; overflow:hidden;
+}
+/* Skrin pendek: pendekkan lajur supaya emoji tak naik sampai ke bar
+   kemajuan di atas. */
+@media (max-height:720px){
+  .reacts{ height:132px; --rise:-128px; }
+}
+.react{
+  position:absolute; bottom:0; left:0; opacity:0;
+  will-change:transform,opacity; animation:reactUp linear forwards;
+  text-shadow:0 2px 6px rgba(0,0,0,.55);
+}
+@keyframes reactUp{
+  0%   { opacity:0;   transform:translate3d(0,0,0) scale(.55) rotate(0deg); }
+  16%  { opacity:1;   transform:translate3d(0,calc(var(--rise) * .12),0) scale(1.1) rotate(var(--rot)); }
+  75%  { opacity:.95; }
+  100% { opacity:0;   transform:translate3d(var(--dx),var(--rise),0) scale(.8) rotate(var(--rot)); }
+}
+/* Slide akhir milik blok CTA. Emoji dimatikan supaya ia tak menarik
+   mata keluar dari butang daftar. */
+body.on-final .reacts{ display:none; }
