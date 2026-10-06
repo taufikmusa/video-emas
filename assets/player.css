@@ -68,6 +68,17 @@ html,body{
   color:rgba(255,255,255,.9);
 }
 .series-chip .sq{ width:7px; height:7px; background:var(--gold); border-radius:2px; }
+/* butang Home — balik ke senarai episod. Gaya sama dengan butang i
+   supaya baris atas nampak satu set, cuma bertepi emas supaya ia yang
+   paling mudah dijumpai. */
+.homebtn{
+  display:flex; align-items:center; gap:5px; height:28px; padding:0 10px 0 8px;
+  border-radius:14px; background:rgba(0,0,0,.45); border:1px solid rgba(255,206,50,.55);
+  color:#fff; text-decoration:none; font-size:10.5px; font-weight:700; white-space:nowrap;
+}
+.homebtn svg{ width:14px; height:14px; display:block; fill:var(--gold); }
+/* Skrin sempit: chip siri disorok supaya nama dan nombor host tak terpotong */
+@media (max-width:440px){ .series-chip{ display:none; } }
 .infobtn{
   width:28px; height:28px; border-radius:50%; background:rgba(0,0,0,.45);
   border:1px solid rgba(255,255,255,.22); color:#fff;
