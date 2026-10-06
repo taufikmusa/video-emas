@@ -41,6 +41,18 @@ Tiga telefon dalam hero guna `ep01`, `ep02` dan `ep04`.
 Upload: github.com → repo → masuk folder `assets/img` → **Add file → Upload files**
 → drag semua gambar → Commit. Site update sendiri dalam 1-2 minit.
 
+## Pindah EP02-EP07 dari Cloudflare
+
+Folder `ep02/` .. `ep07/` dah siap dengan blok OG. Untuk setiap EP, upload dari
+`D:\13-Live Website\gap-ai-content\epNN\deploy`:
+
+- `slides-data.js` → overwrite yang dalam `epNN/` (yang sekarang cuma sementara, tiada komen)
+- `og.jpg` → `epNN/og.jpg`
+- semua `q*.mp4` → `epNN/videos/`
+
+Fail lain dalam folder deploy lama (`index.html`, `comments.js`, `avatar.webp`,
+`site-icon.png`, `_headers`) TAK perlu, semua dah dikongsi dalam `assets/`.
+
 ## Tambah EP baru (contoh EP02)
 
 1. Salin folder `ep01/` jadi `ep02/`.
