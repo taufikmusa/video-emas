@@ -627,7 +627,10 @@ function isNew(e){
 /* ---------- render kad ---------- */
 function render(){
   const term = qEl.value.trim();
-  const list = EPISODES.filter(e => matches(e, term) && (!activeTag || e.tags.includes(activeTag)));
+  /* Papar EP terbaru dulu. EPISODES kekal tersusun EP01 ke atas sebab
+     butang "Mula dari EP01" / "Sambung ke EPxx" bergantung pada susunan tu. */
+  const list = EPISODES.filter(e => matches(e, term) && (!activeTag || e.tags.includes(activeTag)))
+                       .sort((a,b) => b.ep - a.ep);
   const grid = document.getElementById('grid');
   const hit  = document.getElementById('hitline');
 
@@ -673,7 +676,9 @@ function render(){
     html = `<div class="empty">Tiada episod sepadan dengan carian tersebut.<br>Tanya terus di WhatsApp, soalan anda mungkin jadi EP seterusnya.</div>`;
   } else if(!term && !activeTag && NEXT_EP){
     const n = String(NEXT_EP.ep).padStart(2,'0');
-    html += `
+    /* Kad akan datang duduk paling atas, sebelum EP terbaru, supaya
+       susunan kekal kronologi dan EP01 sentiasa paling bawah. */
+    html = `
     <div class="card soon">
       <div class="poster"><span class="ep-badge">EP${n}</span><span class="poster-num">${n}</span></div>
       <div class="card-body">
@@ -684,7 +689,7 @@ function render(){
           <a class="soon-link" href="${NEXT_EP.linkUrl}" target="_blank" rel="noopener">${NEXT_EP.linkLabel} &#8599;</a>
         </div>
       </div>
-    </div>`;
+    </div>` + html;
   }
   grid.innerHTML = html;
 }
