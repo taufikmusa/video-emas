@@ -409,6 +409,21 @@ setInterval(() => {
   spawnReact();
 }, 850);
 
+/* ---------- butang Home ----------
+   Disuntik dari sini, bukan ditulis dalam setiap index.html EP, supaya
+   EP lama dan baru semua dapat butang yang sama dari satu fail.
+   Link relatif "../" sentiasa tuju ke main page walau EP mana dibuka. */
+(function(){
+  const right = document.querySelector('.top-right');
+  if(!right) return;
+  const a = document.createElement('a');
+  a.className = 'homebtn';
+  a.href = '../';
+  a.setAttribute('aria-label', 'Balik ke senarai episod');
+  a.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 11.5h3V21h5.5v-6h3v6H19v-9.5h3z"/></svg>Home';
+  right.insertBefore(a, right.firstChild);
+})();
+
 /* ---------- mula ---------- */
 feedEl.scrollTop = 0;
 setActive(0);
