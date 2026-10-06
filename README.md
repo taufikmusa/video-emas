@@ -25,6 +25,22 @@ Siri Soal Jawab Emas — main page + player swipe setiap EP, host di GitHub Page
 - `assets/img/` — semua gambar main page
 - `ep01/og.jpg`, `ep01/videos/q1.mp4` … `q10.mp4`
 
+## Gambar poster setiap EP
+
+Letak tangkap layar halaman EP dalam `assets/img/` ikut nama nombor EP:
+
+```
+assets/img/ep01.webp   assets/img/ep02.webp   ...   assets/img/ep08.webp
+```
+
+Kad main page ambil sendiri ikut nombor, tak perlu edit `index.html`.
+Kalau fail belum ada, kad tunjuk butang play (bukan gambar pecah).
+Saiz cadangan: potret lebih kurang 380x540, format `.webp`, bawah 60KB.
+Tiga telefon dalam hero guna `ep01`, `ep02` dan `ep04`.
+
+Upload: github.com → repo → masuk folder `assets/img` → **Add file → Upload files**
+→ drag semua gambar → Commit. Site update sendiri dalam 1-2 minit.
+
 ## Tambah EP baru (contoh EP02)
 
 1. Salin folder `ep01/` jadi `ep02/`.

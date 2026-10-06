@@ -308,9 +308,9 @@ footer a{color:var(--yellow);text-decoration:none;font-weight:700;}
 
     <div class="h-media">
       <div class="ph-stack">
-        <div class="ph back-l"><img src="assets/img/ep02.webp" alt="Siri Soal Jawab EP02" loading="eager" decoding="async" width="380" height="510"></div>
-        <div class="ph back-r"><img src="assets/img/ep04.webp" alt="Siri Soal Jawab EP04" loading="eager" decoding="async" width="380" height="534"></div>
-        <div class="ph front"><img src="assets/img/ep01.webp" alt="Siri Soal Jawab EP01" loading="eager" fetchpriority="high" decoding="async" width="380" height="539"></div>
+        <div class="ph back-l"><img src="assets/img/ep02.webp" alt="Siri Soal Jawab EP02" loading="eager" decoding="async" onerror="this.remove()" width="380" height="510"></div>
+        <div class="ph back-r"><img src="assets/img/ep04.webp" alt="Siri Soal Jawab EP04" loading="eager" decoding="async" onerror="this.remove()" width="380" height="534"></div>
+        <div class="ph front"><img src="assets/img/ep01.webp" alt="Siri Soal Jawab EP01" loading="eager" fetchpriority="high" decoding="async" onerror="this.remove()" width="380" height="539"></div>
       </div>
       <img class="cutout" loading="eager" fetchpriority="high" decoding="async" width="820" height="744"
            src="assets/img/profile-cut.webp" srcset="assets/img/profile-cut-460.webp 500w, assets/img/profile-cut.webp 820w"
@@ -413,7 +413,6 @@ const EPISODES = [
     desc: "Asas kenapa duit simpanan susut nilai, dan kenapa orang tukar sebahagiannya jadi emas.",
     url: "ep01/",
     videos: 10, mins: 2, date: "2026-06-12",
-    poster: "assets/img/ep01.webp",   // tangkap layar halaman EP; buang baris ni kalau belum ada
     tags: ["Asas", "Inflasi", "GAP"],
     soalan: ["Kenapa duit makin tak cukup", "Emas naik ke tak", "Beza simpan bank dengan emas", "Modal kecil boleh mula ke", "GAP tu apa"]
   },
@@ -422,7 +421,6 @@ const EPISODES = [
     title: "Barang kemas cantik, tapi sesuai untuk simpanan?",
     desc: "Zakat, harga upah, waris dan jual balik. Beza antara emas pakai dan emas simpan.",
     url: "https://emas-ep02.taufik.fyi/",
-    poster: "assets/img/ep02.webp",
     videos: 10, mins: 2, date: "2026-07-03",
     tags: ["Barang kemas", "Zakat", "Waris", "Jual balik"],
     soalan: ["Zakat emas berapa", "Upah barang kemas hangus ke", "Kedai emas beli balik murah", "Emas untuk waris", "916 lawan 999"]
@@ -432,7 +430,6 @@ const EPISODES = [
     title: "Duit boleh dicetak. Emas tak boleh.",
     desc: "Kenapa emas berbeza daripada duit kertas, kenapa ia mudah dicairkan, dan untuk siapa ia disimpan.",
     url: "https://emas-ep03.taufik.fyi/",
-    poster: "assets/img/ep03.webp",
     videos: 12, mins: 3, date: "2026-07-24",
     tags: ["Ketulenan", "Kecairan", "Waris", "Kecemasan", "Mula kecil"],
     soalan: [
@@ -455,7 +452,6 @@ const EPISODES = [
     title: "Simpanan asyik terkorek balik, kenapa?",
     desc: "Disiplin simpanan. Kenapa tunai kecemasan kena ada dulu, dan bagaimana emas kekalkan simpanan.",
     url: "https://emas-ep04.taufik.fyi/",
-    poster: "assets/img/ep04.webp",
     videos: 7, mins: 2, date: "2026-08-14",
     tags: ["Disiplin", "Tabiat", "Kecemasan"],
     soalan: ["Duit simpanan selalu habis", "Berapa patut simpan sebulan", "Emas ke tabung dulu", "Kalau ada hutang boleh simpan tak"]
@@ -465,7 +461,6 @@ const EPISODES = [
     title: "Dah buka akaun, tapi gram emas masih kosong?",
     desc: "Tabiat menyimpan. Kenapa orang tertangguh, macam mana nak konsisten, dan kenapa mula kecil kalahkan tunggu masa sesuai.",
     url: "https://emas-ep05.taufik.fyi/",
-    poster: "assets/img/ep05.webp",
     videos: 10, mins: 2, date: "2026-08-22",
     tags: ["Disiplin", "Tabiat", "Mula kecil", "GAP"],
     soalan: [
@@ -486,7 +481,6 @@ const EPISODES = [
     title: "Kenapa harga jual balik lebih murah dari harga beli?",
     desc: "Soalan teknikal yang paling kerap ditanya, dari beza harga beli dan jual sampai beza emas digital dengan emas fizikal.",
     url: "https://emas-ep06.taufik.fyi/",
-    poster: "assets/img/ep06.webp",
     videos: 10, mins: 2, date: "2026-08-22",
     tags: ["Harga", "Jual balik", "Emas digital", "Kos", "Asas"],
     soalan: [
@@ -507,7 +501,6 @@ const EPISODES = [
     title: "Baki bank susut sendiri, emas fizikal pula sayang nak jual",
     desc: "Zakat simpanan, dinar dan kambing, infaq bulanan, dan kenapa emas lebih senang bertahan berbanding baki dalam akaun.",
     url: "https://emas-ep07.taufik.fyi/",
-    poster: "assets/img/ep07.webp",
     videos: 10, mins: 2, date: "2026-08-25",
     tags: ["Zakat", "Disiplin", "Tabiat", "Dinar", "Infaq"],
     soalan: [
@@ -629,12 +622,14 @@ function render(){
     const a = accentOf(e.ep);
     const flag = isNew(e) ? '<span class="ep-new">Baru</span>'
               : seen.includes(e.ep) ? '<span class="ep-seen">&#10003; Ditonton</span>' : '';
-    /* `poster` ialah tangkap layar sebenar halaman EP. Ia dipaparkan di dalam
-       bingkai telefon supaya nisbah menegak tak perlu dipotong. Kalau tiada,
-       bingkai tu kekal gelap dengan butang play sahaja. */
-    const shot = e.poster
-      ? `<img src="${e.poster}" alt="Tangkap layar EP${n}" loading="lazy" decoding="async">`
-      : '<span class="pp"></span>';
+    /* Poster = tangkap layar sebenar halaman EP, dipaparkan dalam bingkai
+       telefon. Tak perlu tulis apa-apa dalam EPISODES: letak sahaja fail
+       assets/img/epNN.webp (contoh ep08.webp) dan kad akan ambil sendiri.
+       `poster:` cuma perlu kalau nak guna nama fail lain. Kalau gambar
+       belum ada, bingkai jatuh balik ke butang play, bukan ikon gambar pecah. */
+    const src  = e.poster || `assets/img/ep${n}.webp`;
+    const shot = `<img src="${src}" alt="Tangkap layar EP${n}" loading="lazy" decoding="async"
+                   onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'pp'}))">`;
 
     return `
     <a class="card" href="${e.url}" target="_blank" rel="noopener" data-ep="${e.ep}"
