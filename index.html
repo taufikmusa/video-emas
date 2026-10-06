@@ -676,9 +676,9 @@ function render(){
     html = `<div class="empty">Tiada episod sepadan dengan carian tersebut.<br>Tanya terus di WhatsApp, soalan anda mungkin jadi EP seterusnya.</div>`;
   } else if(!term && !activeTag && NEXT_EP){
     const n = String(NEXT_EP.ep).padStart(2,'0');
-    /* Kad akan datang duduk paling atas, sebelum EP terbaru, supaya
-       susunan kekal kronologi dan EP01 sentiasa paling bawah. */
-    html = `
+    /* Kad akan datang duduk paling bawah supaya EP terbaru sentiasa
+       jadi kad pertama yang orang nampak. */
+    html += `
     <div class="card soon">
       <div class="poster"><span class="ep-badge">EP${n}</span><span class="poster-num">${n}</span></div>
       <div class="card-body">
@@ -689,7 +689,7 @@ function render(){
           <a class="soon-link" href="${NEXT_EP.linkUrl}" target="_blank" rel="noopener">${NEXT_EP.linkLabel} &#8599;</a>
         </div>
       </div>
-    </div>` + html;
+    </div>`;
   }
   grid.innerHTML = html;
 }
