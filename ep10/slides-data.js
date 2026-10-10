@@ -38,7 +38,7 @@ const SLIDES = [
       {n:"Faizal Azmi", t:"abang tu sporting, sokong isteri menyimpan"},
       {n:"Taufik", t:"Baki belanja dapur nampak kecil, tapi bila dikumpul konsisten ia jadi tabung kecemasan keluarga.", reply:true},
       {n:"Aisyah Humaira", t:"suri rumah boleh buka akaun emas ke tanpa slip gaji"},
-      {n:"Taufik", t:"Boleh. Buka Akaun Emas GAP tak perlukan slip gaji. Beli dari RM100 bila ada lebihan.", reply:true},
+      {n:"Taufik", t:"Boleh. Buka akaun percuma dan beli dari RM100 bila ada lebihan. Tiada kewajipan bayar setiap bulan.", reply:true},
       {n:"Mazlina Che Ros", t:"syiling dalam uncang tu baik tukar jadi gram"},
       {n:"Taufik", t:"Betul. Syiling dalam uncang senang terguna. Bila jadi gram emas, ia lebih susah dikorek untuk benda kecil.", reply:true},
     ],
