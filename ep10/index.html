@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<!-- ===== BLOK OG — SATU-SATUNYA BAHAGIAN YANG BERBEZA ANTARA EP =====
+     WhatsApp, Facebook dan Telegram baca tag ni untuk jana kad preview.
+     Tiga syarat keras: og:image mesti URL MUTLAK, fail bawah 600KB, dan
+     lebar 1200px supaya WhatsApp papar kad besar (bawah 300px jadi
+     thumbnail kecil; bawah 100px tiada preview langsung).
+
+     WhatsApp cache preview berhari-hari sampai berminggu dan TIADA cara
+     rasmi untuk paksa refresh. Betulkan blok ni sebelum link disebar —
+     kalau tersilap, satu-satunya jalan ialah tukar URL (?v=2). -->
+<title>Gaji, dapur atau niaga, simpanan Oyen tetap jalan — Siri Soal Jawab EP10</title>
+<meta name="description" content="5 soalan pendek tentang simpan emas fizikal Public Gold. Swipe, tengok, faham dalam 3 minit.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Simpan Emas Fizikal">
+<meta property="og:locale" content="ms_MY">
+<meta property="og:url" content="https://video.taufik.fyi/ep10/">
+<meta property="og:title" content="Gaji, dapur atau niaga, simpanan Oyen tetap jalan">
+<meta property="og:description" content="5 soalan pendek tentang simpan emas fizikal Public Gold. Swipe, tengok, faham dalam 3 minit.">
+<meta property="og:image" content="https://video.taufik.fyi/ep10/og.jpg">
+<meta property="og:image:secure_url" content="https://video.taufik.fyi/ep10/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Siri Soal Jawab EP10 — Gaji, dapur atau niaga, simpanan Oyen tetap jalan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gaji, dapur atau niaga, simpanan Oyen tetap jalan">
+<meta name="twitter:description" content="5 soalan pendek tentang simpan emas fizikal Public Gold. Swipe, tengok, faham dalam 3 minit.">
+<meta name="twitter:image" content="https://video.taufik.fyi/ep10/og.jpg">
+<!-- ===== hujung blok OG ===== -->
+<link rel="icon" href="../assets/site-icon.png">
+<link rel="stylesheet" href="../assets/player.css">
+</head>
+<body>
+
+<!-- chrome tetap: host + siri + progress -->
+<div class="chrome">
+  <div class="topbar">
+    <div class="host">
+      <img class="avatar" src="../assets/avatar.webp" alt="Taufik Musa" width="38" height="38">
+      <div class="host-meta">
+        <div class="host-name">Taufik Musa</div>
+        <div class="host-sub">Dealer Public Gold</div>
+        <a class="host-tel" id="hostTel" target="_blank" rel="noopener">+60132740711</a>
+      </div>
+    </div>
+    <div class="top-right">
+      <div class="series-chip"><span class="sq"></span>Siri Soal Jawab</div>
+      <button class="infobtn" id="infoBtn" aria-label="Baca nota kandungan">i</button>
+    </div>
+  </div>
+  <div class="progress">
+    <div class="bars" id="bars"></div>
+    <div class="count" id="count">1/10</div>
+  </div>
+</div>
+
+<!-- swipe feed -->
+<main class="feed" id="feed"></main>
+
+<!-- CTA terapung + senyap -->
+<a class="pinned" id="pinned" target="_blank" rel="noopener">
+  <img class="pinned-ic" src="../assets/site-icon.png" alt="" width="28" height="28">
+  <div class="pinned-txt">
+    <div class="pinned-t"><span class="pinned-tag">PIN</span>Akaun Emas GAP Public Gold</div>
+    <div class="pinned-s">Buka akaun percuma · Mula dari RM100</div>
+  </div>
+</a>
+<a class="cta-float" id="ctaFloat" target="_blank" rel="noopener">Daftar</a>
+
+<div class="playpause" id="playPause" aria-hidden="true">
+  <svg viewBox="0 0 24 24"><path id="ppIcon" d="M8 5v14l11-7z"/></svg>
+</div>
+
+<!-- butang buka suara di tengah -->
+<button class="sound-cue" id="soundCue" type="button" aria-label="Klik untuk buka suara">
+  <span class="sc-ic">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4zm12.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+  </span>
+  <span>Klik untuk buka suara</span>
+</button>
+
+<!-- lapisan emoji reaksi -->
+<div class="reacts" id="reacts" aria-hidden="true"></div>
+
+<!-- disclaimer -->
+<div class="disc" id="disc">
+  <div class="disc-card">
+    <div class="disc-icon">i</div>
+    <div class="disc-text">Video content AI ini direka untuk sampaikan ilmu &amp; info emas di Public Gold. Komen sekadar contoh untuk mantapkan kefahaman anda.</div>
+    <button class="disc-close" id="discClose">Faham</button>
+  </div>
+</div>
+
+<!-- nombor EP: dipakai untuk tanda "Ditonton" pada main page -->
+<script>const EP_NUM = 10;</script>
+<script src="slides-data.js"></script>
+<script src="../assets/comments.js"></script>
+<script src="../assets/player.js"></script>
+</body>
+</html>
